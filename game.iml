@@ -10,5 +10,6 @@
     <orderEntry type="library" name="lwjgl" level="project" />
     <orderEntry type="library" name="lwjgl (2)" level="project" />
     <orderEntry type="library" name="lwjgl (3)" level="project" />
+    <orderEntry type="library" name="joml-1.10.4" level="project" />
   </component>
 </module>
