@@ -14,8 +14,11 @@ import	static	org.lwjgl.opengl.GL30.*;
 
 public class Mesh {
     private final int vaoId;
+
     private final List<Integer> vboIdList;
+
     private final int vertexCount;
+
     private final Texture texture;
 
     public Mesh(float[] positions, float[] textCoords, int[] indices, Texture texture){
@@ -52,6 +55,7 @@ public class Mesh {
 
             //index vbo
             vboId = glGenBuffers();
+            vboIdList.add(vboId);
             indicesBuffer = MemoryUtil.memAllocInt(indices.length);
             indicesBuffer.put(indices).flip();
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,vboId);

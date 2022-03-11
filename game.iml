@@ -14,5 +14,7 @@
     <orderEntry type="library" name="pngdecoder-1.0" level="project" />
     <orderEntry type="library" name="joml-1.10.4 (2)" level="project" />
     <orderEntry type="library" name="lwjgl-stb" level="project" />
+    <orderEntry type="library" name="joml-1.10.4 (3)" level="project" />
+    <orderEntry type="library" name="lwjgl-stb-javadoc" level="project" />
   </component>
 </module>
