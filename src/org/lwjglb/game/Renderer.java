@@ -48,7 +48,9 @@ public class Renderer {
         shaderProgram.createUniform("projectionMatrix");
         shaderProgram.createUniform("modelViewMatrix");
         shaderProgram.createUniform("texture_sampler");
-        window.setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+//        window.setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        shaderProgram.createUniform("colour");
+        shaderProgram.createUniform("useColour");
     }
     public void clear(){
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -67,8 +69,12 @@ public class Renderer {
         Matrix4f viewMatrix = transformation.getViewMatrix(camera);
         shaderProgram.setUniform("texture_sampler", 0);
         for(GameItem gameItem:gameItems){
+            Mesh mesh = gameItem.getMesh();
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem,viewMatrix);
             shaderProgram.setUniform("modelViewMatrix",modelViewMatrix);
+
+            shaderProgram.setUniform("colour",mesh.getColor());
+            shaderProgram.setUniform("useColour",mesh.isTextured()?0:1);
             gameItem.getMesh().render();
         }
         shaderProgram.unbind();
