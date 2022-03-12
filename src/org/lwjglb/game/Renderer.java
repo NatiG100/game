@@ -4,6 +4,7 @@ import org.joml.Matrix4d;
 import org.joml.Matrix4f;
 import org.lwjglb.engine.GameItem;
 import org.lwjglb.engine.Window;
+import org.lwjglb.engine.graph.Camera;
 import org.lwjglb.engine.graph.Mesh;
 import org.lwjglb.engine.graph.ShaderProgram;
 import org.lwjglb.engine.Utils;
@@ -45,14 +46,14 @@ public class Renderer {
         shaderProgram.link();
 
         shaderProgram.createUniform("projectionMatrix");
-        shaderProgram.createUniform("worldMatrix");
+        shaderProgram.createUniform("modelViewMatrix");
         shaderProgram.createUniform("texture_sampler");
         window.setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     }
     public void clear(){
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     }
-    public void render(Window window, GameItem[] gameItems){
+    public void render(Window window, Camera camera, GameItem[] gameItems){
         clear();
         if(window.isResized()){
             glViewport(0,0,window.getWidth(),window.getHeight());
@@ -60,17 +61,14 @@ public class Renderer {
         }
 
         shaderProgram.bind();
+
         Matrix4f projectionMatrix = transformation.getProjectionMatrix(FOV,window.getWidth(),window.getHeight(),Z_NEAR,Z_FAR);
         shaderProgram.setUniform("projectionMatrix" ,projectionMatrix);
-
+        Matrix4f viewMatrix = transformation.getViewMatrix(camera);
         shaderProgram.setUniform("texture_sampler", 0);
         for(GameItem gameItem:gameItems){
-            Matrix4f worldMatrix = transformation.getWorldMatrix(
-                    gameItem.getPosition(),
-                    gameItem.getRotation(),
-                    gameItem.getScale()
-            );
-            shaderProgram.setUniform("worldMatrix",worldMatrix);
+            Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem,viewMatrix);
+            shaderProgram.setUniform("modelViewMatrix",modelViewMatrix);
             gameItem.getMesh().render();
         }
         shaderProgram.unbind();
