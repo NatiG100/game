@@ -31,13 +31,13 @@ public class DummyGame implements IGameLogic{
     @Override
     public void init(Window window) throws Exception{
         renderer.init(window);
-        Mesh mesh = OBJLoader.loadMesh("C:\\Users\\Nati\\IdeaProjects\\game\\src\\resources\\models\\cube.obj");
-        System.out.println(mesh.toString());
+        Mesh mesh = OBJLoader.loadMesh("C:\\Users\\Nati\\IdeaProjects\\game\\src\\resources\\models\\untitled.obj");
+
         Texture texture = new Texture("textures/grassblock.png");
         mesh.setTexture(texture);
         GameItem gameItem = new GameItem(mesh);
         gameItem.setScale(0.5f);
-        gameItem.setPosition(0,0,-2);
+        gameItem.setPosition(1,0,-2);
         gameItems = new GameItem[]{gameItem};
     }
 

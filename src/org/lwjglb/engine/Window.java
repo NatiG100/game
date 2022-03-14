@@ -40,6 +40,7 @@ public class Window {
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
+
         windowHandle = glfwCreateWindow(width,height,title,NULL, NULL);
         if(windowHandle==NULL){
             throw new RuntimeException("Failed to create the GLFW window");
