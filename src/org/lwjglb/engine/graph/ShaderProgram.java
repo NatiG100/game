@@ -29,6 +29,23 @@ public class ShaderProgram {
         }
         uniforms.put(uniformName,uniformLocation);
     }
+    public void createPointLightUniform(String uniformName) throws Exception{
+        createUniform(uniformName+".colour");
+        createUniform(uniformName+".position");
+        createUniform(uniformName+".intensity");
+        createUniform(uniformName+".att.constant");
+        createUniform(uniformName+".att.linear");
+        createUniform(uniformName+".att.exponent");
+    }
+    public void createMaterialUniform(String uniformName) throws Exception{
+        createUniform(uniformName+".ambient");
+        createUniform(uniformName+".diffuse");
+        createUniform(uniformName+".specular");
+        createUniform(uniformName+".hasTexture");
+        createUniform(uniformName+".reflectance");
+    }
+
+
 
     public void setUniform(String uniformName, Matrix4f value){
         try(MemoryStack stack=MemoryStack.stackPush()){
